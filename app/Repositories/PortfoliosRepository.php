@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Vitaly
+ * Date: 02/12/2018
+ * Time: 18:23
+ */
+namespace Corp\Repositories;
+use Corp\Portfolio;
+
+class PortfoliosRepository extends Repository {
+
+    public function __construct(Portfolio $portfolio)
+    {
+        $this->model = $portfolio;
+    }
+    public function one($alias, $attr = [])
+    {
+        $portfolio =  parent::one($alias, $attr);
+        if($portfolio  && $portfolio->img){
+            $portfolio->img = json_decode($portfolio->img);
+        }
+        return $portfolio;
+    }
+
+}
+
